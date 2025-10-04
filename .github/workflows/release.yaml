@@ -5,6 +5,7 @@ on:
     tags:
       - "*"
       - "!*b"
+  workflow_dispatch:  # 支持手动运行
 
 env:
   PLUGIN_NAME: webpage-html-export # Change this to match the id of your plugin.
