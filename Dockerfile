@@ -29,7 +29,7 @@ ENV TZ=Etc/UTC
 # Download and install the Obsidian package
 ARG OBSIDIAN_VERSION=1.9.12
 RUN apt update && apt install -y curl \
-  && curl -L "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb" -o obsidian.deb \
+  && curl -L "https://bgithub.xyz/obsidianmd/obsidian-releases/releases/download/v1.9.12/obsidian_1.9.12_amd64.deb" -o obsidian.deb \
   && apt install --no-install-recommends -y libasound2 ./obsidian.deb
 
 # Install dependencies
