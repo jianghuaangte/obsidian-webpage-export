@@ -115,6 +115,6 @@ jobs:
         with:
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: KosmosisDire/obsidian-webpage-export:latest , KosmosisDire/obsidian-webpage-export:${{ steps.get_version.outputs.tag_name }}
+          tags: freedomzzz/obsidian-webpage-export:latest , freedomzzz/obsidian-webpage-export:${{ steps.get_version.outputs.tag_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
