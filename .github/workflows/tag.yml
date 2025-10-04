@@ -1,0 +1,33 @@
+# push时自动打tag 触发releases ci
+name: Force Tag 1.9.2
+on:
+  workflow_dispatch: # 允许在 GitHub Actions 页面手动触发
+  repository_dispatch:
+    types: [build-trigger]
+
+jobs:
+  force-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout with PAT
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_FOR_FORCE_TAG }}
+
+      - name: Set tag 1.9.2 using PAT
+        env:
+          GITHUB_PAT: ${{ secrets.PAT_FOR_FORCE_TAG }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          echo "Deleting existing 1.9.2 tag (if any)..."
+          git tag -d 1.9.2 || true
+          git push https://x-access-token:${GITHUB_PAT}@github.com/${GITHUB_REPOSITORY}.git :refs/tags/1.9.2 || true
+
+          echo "Creating new 1.9.2 tag..."
+          git tag 1.9.2
+          git push https://x-access-token:${GITHUB_PAT}@github.com/${GITHUB_REPOSITORY}.git 1.9.2
+
+          echo "Tag 1.9.2 pushed successfully."
